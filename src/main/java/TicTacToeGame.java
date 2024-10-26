@@ -8,6 +8,16 @@ public class TicTacToeGame {
 
     private int[][] board = new int[3][3];
 
+    public boolean checkStraightLine(int[][] coordinates) {
+        if (coordinates.length == 2) return true;
+        for (int i = 2; i < coordinates.length; i++) {
+            if ((coordinates[i][0] - coordinates[i - 1][0]) * (coordinates[i - 1][1] - coordinates[i - 2][1]) != (coordinates[i - 1][0] - coordinates[i - 2][0]) * (coordinates[i][1] - coordinates[i - 1][1])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public String tictactoe(int[][] moves) {
         for (int i = 0; i < moves.length; i++) {
             int x = moves[i][0];
@@ -20,7 +30,7 @@ public class TicTacToeGame {
                 if (check(x, y, 2)) return "B";
             }
         }
-        return moves.length == 9? "Draw":"Pending";
+        return moves.length == 9 ? "Draw" : "Pending";
     }
 
     public boolean check(int x, int y, int player) {
@@ -29,8 +39,7 @@ public class TicTacToeGame {
         if (board[0][0] == player && board[1][1] == player && board[2][2] == player) return true;
         if (board[0][2] == player && board[1][1] == player && board[2][0] == player) return true;
         return false;
-     }
-
+    }
 
 
 }
